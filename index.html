@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio DataTech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css_portfolio/styles.css">
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><span class="logo-word">Lucas</span> <span class="logo-word">Almonacid</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projects">Proyects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <section class="hero" id="home">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <h1 class="hero-title"><span class="first-name"></span><span class="last-name"></span><span class="type-cursor">&nbsp;</span></h1>
+            <p class="hero-subtitle"><span class="sub-text"></span><span class="type-cursor">&nbsp;</span></p>
+            <a href="#projects" class="hero-btn">View projects<span class="arrow">&rarr;</span></a>
+        </div>
+    </section>
+    <section class="tech-section" id="about">
+        <nav class="vertical-nav">
+            <ul>
+                <li><a href="#home">1</a></li>
+                <li><a href="#about">2</a></li>
+                <li><a href="#services">3</a></li>
+                <li><a href="#projects">4</a></li>
+                <li><a href="#contact">5</a></li>
+            </ul>
+        </nav>
+        <div class="card" id="about-card">
+            <h2 class="tech-title">About me</h2>
+            <p class="about-text"><span class="about-line-1"></span><span class="about-cursor">&nbsp;</span></p>
+            <p class="about-text"><span class="about-line-2"></span><span class="about-cursor">&nbsp;</span></p>
+        </div>
+        <div class="card">
+            <h2 class="tech-title">Technologies</h2>
+            <div class="tech-icons">
+                <i class="devicon-html5-plain"></i>
+                <i class="devicon-css3-plain"></i>
+                <i class="devicon-javascript-plain"></i>
+                <i class="devicon-php-plain"></i>
+                <i class="devicon-bootstrap-plain"></i>
+                <i class="devicon-mysql-plain-wordmark"></i>
+            </div>
+        </div>
+    </section>
+    <section class="services-section" id="services">
+        <div class="card" id="services-card">
+            <h2 class="tech-title">Services</h2>
+            <p class="services-heading"><span class="svc-text"></span><span class="svc-cursor">&nbsp;</span></p>
+            <p class="about-text"><span class="svc-text"></span><span class="svc-cursor">&nbsp;</span></p>
+            <p class="about-text"><span class="svc-text"></span><span class="svc-cursor">&nbsp;</span></p>
+            <p class="services-heading"><span class="svc-text"></span><span class="svc-cursor">&nbsp;</span></p>
+            <p class="about-text"><span class="svc-text"></span><span class="svc-cursor">&nbsp;</span></p>
+            <p class="about-text"><span class="svc-text"></span><span class="svc-cursor">&nbsp;</span></p>
+            <p class="about-text"><span class="svc-text"></span><span class="svc-cursor">&nbsp;</span></p>
+        </div>
+    </section>
+    <section class="proyects-section" id="projects">
+        <div class="card">
+            <h2 class="tech-title">Projects</h2>
+            <p class="about-text">Tu texto aquí.</p>
+        </div>
+    </section>
+    <section class="contact-section" id="contact">
+        <div class="card">
+            <h2 class="tech-title">Contact</h2>
+            <p class="about-text">Tu texto aquí.</p>
+        </div>
+    </section>
+    <script>
+        const firstEl = document.querySelector('.hero-title .first-name');
+        const lastEl = document.querySelector('.hero-title .last-name');
+        const subTextEl = document.querySelector('.hero-subtitle .sub-text');
+        const titleCursor = document.querySelector('.hero-title .type-cursor');
+        const subCursor = document.querySelector('.hero-subtitle .type-cursor');
+
+        const firstText = 'Lucas';
+        const lastText = ' Almonacid';
+        const subText = 'Frontend & Backend';
+
+        function setCursor(which) {
+            titleCursor.style.visibility = which === 'title' ? 'visible' : 'hidden';
+            subCursor.style.visibility = which === 'sub' ? 'visible' : 'hidden';
+        }
+
+        function sleep(ms) {
+            return new Promise(r => setTimeout(r, ms));
+        }
+
+        async function typeInto(el, text, speed = 60) {
+            for (let i = 0; i <= text.length; i++) {
+                el.textContent = text.slice(0, i);
+                await sleep(speed);
+            }
+        }
+
+        async function eraseFrom(el, speed = 30) {
+            const len = el.textContent.length;
+            for (let i = len; i >= 0; i--) {
+                el.textContent = el.textContent.slice(0, i);
+                await sleep(speed);
+            }
+        }
+
+        async function loop() {
+            while (true) {
+                setCursor('title');
+                await typeInto(firstEl, firstText, 70);
+                await typeInto(lastEl, lastText, 70);
+                await sleep(800);
+
+                setCursor('sub');
+                await sleep(300);
+                await typeInto(subTextEl, subText, 55);
+                await sleep(1200);
+
+                await eraseFrom(subTextEl, 35);
+                await sleep(200);
+
+                setCursor('title');
+                await eraseFrom(lastEl, 35);
+                await eraseFrom(firstEl, 35);
+                await sleep(700);
+            }
+        }
+
+        loop();
+
+        // --- About me typewriter ---
+        const aboutLine1 = document.querySelector('.about-line-1');
+        const aboutLine2 = document.querySelector('.about-line-2');
+        const aboutCursors = document.querySelectorAll('#about-card .about-cursor');
+
+        const aboutText1 = 'Web development student || Web ecosystem (Frontend & Backend)';
+        const aboutText2 = 'Passionate about technology and software development. I dedicate my training to building web applications, integrating user interfaces with server-side logic and relational databases. Currently expanding my skills across different programming languages and software tools.';
+
+        function setAboutCursor(index) {
+            aboutCursors.forEach((c, i) => {
+                c.style.visibility = i === index ? 'visible' : 'hidden';
+            });
+        }
+
+        let aboutPlayed = false;
+        let aboutObserver;
+
+        async function animateAbout() {
+            setAboutCursor(0);
+            aboutLine1.textContent = '';
+            aboutLine2.textContent = '';
+            await typeInto(aboutLine1, aboutText1, 12);
+            setAboutCursor(1);
+            await typeInto(aboutLine2, aboutText2, 6);
+            aboutObserver.disconnect();
+        }
+
+        const aboutCard = document.getElementById('about-card');
+        aboutObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !aboutPlayed) {
+                    aboutPlayed = true;
+                    animateAbout();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        aboutObserver.observe(aboutCard);
+
+        // --- Services typewriter ---
+        const svcTexts = document.querySelectorAll('#services-card .svc-text');
+        const svcCursors = document.querySelectorAll('#services-card .svc-cursor');
+
+        const servicesLines = [
+            'Frontend',
+            'Responsive web layout design (HTML, CSS, JS, mobile-first approach)',
+            'Landing pages and web platforms with interactive user interfaces (JS, form handling, validation)',
+            'Backend',
+            'Server-side logic with PHP (form processing, data handling)',
+            'Integration and connectivity with MySQL / relational databases',
+            'Authentication architecture (user login / registration)'
+        ];
+
+        function setSvcCursor(index) {
+            svcCursors.forEach((c, i) => {
+                c.style.visibility = i === index ? 'visible' : 'hidden';
+            });
+        }
+
+        let svcPlayed = false;
+        let svcObserver;
+
+        async function animateServices() {
+            for (let i = 0; i < svcTexts.length; i++) {
+                setSvcCursor(i);
+                await typeInto(svcTexts[i], servicesLines[i], 6);
+            }
+            svcObserver.disconnect();
+        }
+
+        const servicesCard = document.getElementById('services-card');
+        svcObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !svcPlayed) {
+                    svcPlayed = true;
+                    animateServices();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        svcObserver.observe(servicesCard);
+    </script>
+</body>
+</html>
