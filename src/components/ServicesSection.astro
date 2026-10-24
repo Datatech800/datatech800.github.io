@@ -1,34 +1,38 @@
 ---
+import { Image } from 'astro:assets'
+import budgetImg from '../assets/budget.webp';
+import landingNailsImg from '../assets/landing_nails.webp';
+import darkmoonBarberImg from '../assets/darkmoon_barber.webp';
 ---
 
 <section class="services-section" id="services">
     <div class="card" id="services-card">
-        <h2 class="tech-title" data-text="SERVICES"><span class="tt-text"></span><span class="tt-cursor">&nbsp;</span></h2>
+        <h2 class="tech-title" data-text="SERVICES"><span class="tt-text"></span></h2>
         <div class="services-subcard">
-            <p class="services-heading"><span class="svc-text"></span><span class="svc-cursor">&nbsp;</span></p>
-            <p class="about-text"><span class="svc-text"></span><span class="svc-cursor">&nbsp;</span></p>
-            <p class="about-text"><span class="svc-text"></span><span class="svc-cursor">&nbsp;</span></p>
+            <p class="services-heading"><span class="svc-text"></span></p>
+            <p class="about-text"><span class="svc-text"></span></p>
+            <p class="about-text"><span class="svc-text"></span></p>
         </div>
         <div class="services-subcard">
-            <p class="services-heading"><span class="svc-text"></span><span class="svc-cursor">&nbsp;</span></p>
-            <p class="about-text"><span class="svc-text"></span><span class="svc-cursor">&nbsp;</span></p>
-            <p class="about-text"><span class="svc-text"></span><span class="svc-cursor">&nbsp;</span></p>
-            <p class="about-text"><span class="svc-text"></span><span class="svc-cursor">&nbsp;</span></p>
+            <p class="services-heading"><span class="svc-text"></span></p>
+            <p class="about-text"><span class="svc-text"></span></p>
+            <p class="about-text"><span class="svc-text"></span></p>
+            <p class="about-text"><span class="svc-text"></span></p>
         </div>
     </div>
     <div class="card" id="projects">
-        <h2 class="tech-title" data-text="PR0JECTS"><span class="tt-text"></span><span class="tt-cursor">&nbsp;</span></h2>
-        <a href="https://datatech800.github.io/Budget-generator/" target="_blank" rel="noopener noreferrer">
-            <img src="/img/budget.webp" alt="Budget generator preview" class="project-img">
+        <h2 class="tech-title" data-text="PR0JECTS"><span class="tt-text"></span></h2>
+        <a href="https://datatech800.github.io/Budget-generator/" target="_blank" rel="noopener noreferrer" class="project-img-link">
+            <Image src={budgetImg} alt="Budget generator preview" class="project-img" loading="lazy" />
         </a>
-        <a href="https://github.com/Datatech800/Budget-generator" target="_blank" rel="noopener noreferrer" class="project-link">https://github.com/Datatech800/Budget-generator</a>
-        <a href="https://datatech800.github.io/darky_nails/" target="_blank" rel="noopener noreferrer">
-            <img src="/img/landing_nails.webp" alt="Darky Nails landing preview" class="project-img">
+        <a href="https://github.com/Datatech800/Budget-generator" target="_blank" rel="noopener noreferrer" class="project-link">View repo on Github</a>
+        <a href="https://datatech800.github.io/darky_nails/" target="_blank" rel="noopener noreferrer" class="project-img-link">
+            <Image src={landingNailsImg} alt="Darky Nails landing preview" class="project-img" loading="lazy" />
         </a>
-        <a href="https://github.com/Datatech800/darky_nails" target="_blank" rel="noopener noreferrer" class="project-link">https://github.com/Datatech800/darky_nails</a>
-        <a href="https://datatech800.github.io/Darkmoon-Barbershop/"target="_blank" rel="noopener noreferrer">
-                <img src="img/darkmoon_barber.webp" alt="Darkmoon Barbershop landing preview" class="project-img">
-            </a>
-            <a href="https://github.com/Datatech800/Darkmoon-Barbershop" target="_blank" rel="noopener noreferrer" class="project-link">https://github.com/Datatech800/Darkmoon-Barbershop</a>
+        <a href="https://github.com/Datatech800/darky_nails" target="_blank" rel="noopener noreferrer" class="project-link">View repo on Github</a>
+        <a href="https://datatech800.github.io/Darkmoon-Barbershop/" target="_blank" rel="noopener noreferrer" class="project-img-link">
+            <Image src={darkmoonBarberImg} alt="Darkmoon Barbershop landing preview" class="project-img" loading="lazy" />
+        </a>
+        <a href="https://github.com/Datatech800/Darkmoon-Barbershop" target="_blank" rel="noopener noreferrer" class="project-link">View repo on Github</a>
     </div>
 </section>

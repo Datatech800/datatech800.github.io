@@ -1,16 +1,42 @@
----
----
+------
 
 <nav class="navbar">
     <div class="logo"><span class="logo-word">LUCAS</span> <span class="logo-word">ALM0NACID</span></div>
-    <button class="nav-toggle" aria-label="Menu">
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
         <span></span><span></span><span></span>
     </button>
-    <ul class="nav-links">
-        <li><a href="#home">H0ME</a></li>
-        <li><a href="#about">AB0UT ME</a></li>
-        <li><a href="#services">SERVICES</a></li>
-        <li><a href="#projects">PR0YECTS</a></li>
-        <li><a href="#contact">C0NTACT</a></li>
-    </ul>
+    <div class="nav-menu" id="nav-menu">
+        <h2 class="nav-menu-title">MENÚ</h2>
+        <ul class="nav-links">
+            <li><a href="#home" class="nav-link">H0ME</a></li>
+            <li><a href="#about-card" class="nav-link">AB0UT ME</a></li>
+            <li><a href="#services-card" class="nav-link">SERVICES</a></li>
+            <li><a href="#projects" class="nav-link">PR0JECTS</a></li>
+            <li><a href="#tech" class="nav-link">TECH STACK</a></li>
+            <li><a href="#contact" class="nav-link">C0NTACT</a></li>
+        </ul>
+    </div>
 </nav>
+
+<script>
+    const navbar = document.querySelector('.navbar');
+
+    const HIDE_AFTER = 80; // px de scroll antes de ocultar la navbar
+    const SHOW_AT = 12;    // solo reaparece al llegar arriba del todo
+
+    let hidden = false;
+
+    function updateNavbar() {
+        const y = window.pageYOffset || document.documentElement.scrollTop;
+        const shouldHide = hidden ? y > SHOW_AT : y > HIDE_AFTER;
+
+        if (shouldHide !== hidden) {
+            hidden = shouldHide;
+            navbar.classList.toggle('hidden', hidden);
+        }
+    }
+
+    window.addEventListener('scroll', updateNavbar, { passive: true });
+    window.addEventListener('load', updateNavbar);
+    updateNavbar();
+</script>

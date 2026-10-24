@@ -13,7 +13,15 @@ body {
 }
 
 section[id] {
-    scroll-margin-top: 4rem;
+    scroll-margin-top: 6rem;
+}
+
+#about-card,
+#services-card,
+#projects,
+#tech,
+#contact {
+    scroll-margin-top: 6rem;
 }
 
 .navbar {
@@ -24,6 +32,61 @@ section[id] {
     background-color: #121212;
     border-top: 2px solid #C1121F;
     border-bottom: 2px solid #C1121F;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    transition:
+        background-color 0.45s ease,
+        border-color 0.45s ease;
+}
+
+/* Navbar oculto al bajar: la barra y el logo se desvanecen,
+   pero el botón hamburguesa (fixed) sigue visible y clickeable */
+.navbar.hidden:not(.open) {
+    background-color: transparent;
+    border-color: transparent;
+    pointer-events: none;
+}
+
+.navbar.hidden:not(.open) .logo {
+    opacity: 0;
+    transform: translateY(-12px);
+}
+
+.navbar.hidden:not(.open) .nav-menu {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.navbar.hidden .nav-toggle {
+    pointer-events: auto;
+}
+
+.navbar.scrolled {
+    background-color: rgba(18, 18, 18, 0.5);
+    backdrop-filter: blur(10px);
+    border: none;
+    padding: 0;
+}
+
+.navbar.scrolled .logo {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.navbar.scrolled .nav-links {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.navbar.scrolled .nav-toggle {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.logo-word.scrolled {
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .logo {
@@ -33,6 +96,7 @@ section[id] {
     font-weight: 700;
     color: #C1121F;
     letter-spacing: 2px;
+    transition: opacity 0.45s ease, transform 0.45s ease;
 }
 
 .logo-word {
@@ -42,6 +106,16 @@ section[id] {
 
 .logo-word:hover {
     color: #3A3F47;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: stretch;
+    transition: opacity 0.45s ease;
+}
+
+.nav-menu-title {
+    display: none;
 }
 
 .nav-links {
@@ -66,6 +140,8 @@ section[id] {
     letter-spacing: 1px;
     border-left: 2px solid #C1121F;
     padding: 0 1.5rem;
+    position: relative;
+    overflow: hidden;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -92,7 +168,7 @@ section[id] {
 .hero-background {
     position: absolute;
     inset: 0;
-    background-image: url('/img/city.webp');
+    background-image: url('../assets/city.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -149,6 +225,37 @@ section[id] {
     display: block;
     white-space: nowrap;
     min-height: 1.2em;
+}
+
+.hero-title {
+    animation: fx-jitter 1.9s steps(1) infinite;
+}
+
+@keyframes fx-jitter {
+    0%, 7%, 15%, 55%, 100% {
+        transform: none;
+        opacity: 1;
+    }
+    8% {
+        transform: skewX(-14deg) translateX(-4px);
+    }
+    10% {
+        transform: skewX(10deg) translateX(3px);
+    }
+    12% {
+        transform: translateY(-3px);
+        opacity: 0.6;
+    }
+    46% {
+        transform: skewX(8deg);
+    }
+    48% {
+        transform: skewX(-6deg) translateY(2px);
+        opacity: 0.75;
+    }
+    50% {
+        transform: translateX(2px);
+    }
 }
 
 .type-cursor {
@@ -484,21 +591,26 @@ section[id] {
     gap: 2rem;
 }
 
+.project-img-link {
+    display: block;
+    width: 85%;
+    margin: 0 auto 1.5rem;
+}
+
 .project-img {
     display: block;
-    width: 60%;
+    width: 100%;
     max-width: 100%;
     height: auto;
-    margin: 0 0 2rem;
     border: 2px solid #C1121F;
 }
 
 .project-link {
     display: block;
-    width: 60%;
-    margin: 0 0 1.5rem;
+    width: 85%;
+    margin: 0 auto 2rem;
     font-family: 'Orbitron', sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 700;
     letter-spacing: 1px;
     text-align: center;
@@ -507,7 +619,6 @@ section[id] {
     background-color: #121212;
     border: 2px solid #C1121F;
     padding: 0.7rem 1rem;
-    word-break: break-all;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -516,15 +627,35 @@ section[id] {
     color: #121212;
 }
 
-.proyects-section,
-.contact-section {
-    background-color: #121212;
-    padding: 4rem 3rem;
-    padding-left: 7rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
+    .proyects-section,
+    .contact-section {
+        background-color: #121212;
+        padding: 4rem 3rem;
+        padding-left: 7rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .proyects-section .card,
+    .contact-section .card {
+        width: 100%;
+        max-width: 42rem;
+        align-self: center;
+    }
+
+    .proyects-section .project-img-link,
+    .proyects-section .project-link {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .proyects-section .project-img-link,
+    .proyects-section .project-link {
+        margin-left: auto;
+        margin-right: auto;
+    }
 
 .proyects-section {
     background-color: #121212;
@@ -559,6 +690,7 @@ section[id] {
     width: 24px;
     height: 2px;
     background-color: #C1121F;
+    transition: transform 0.3s ease, opacity 0.25s ease, background-color 0.3s ease;
 }
 
 .nav-toggle.scrolled {
@@ -575,7 +707,9 @@ section[id] {
     .navbar {
         flex-wrap: wrap;
         padding: 1rem;
-        position: relative;
+        position: sticky;
+        top: 0;
+        z-index: 100;
     }
 
     .nav-toggle {
@@ -596,47 +730,161 @@ section[id] {
         letter-spacing: 1px;
     }
 
+    .nav-menu {
+        position: fixed;
+        inset: 0;
+        z-index: 99;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+        width: 100%;
+        padding: 4.5rem 1.5rem 1.5rem;
+        background-color: #121212;
+        background-image:
+            linear-gradient(rgba(193, 18, 31, 0.08) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(193, 18, 31, 0.08) 1px, transparent 1px);
+        background-size: 3rem 3rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-16px);
+        transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s linear 0.55s;
+        height: 100vh;
+        height: 100dvh;
+    }
+
+    .navbar.open .nav-menu {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+        transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s;
+        height: 100dvh;
+    }
+
+    /* El menú móvil siempre muestra sus enlaces, aunque el navbar esté en estado .scrolled */
+    .navbar.scrolled .nav-links {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .nav-menu-title {
+        display: block;
+        width: 100%;
+        max-width: 28rem;
+        height: 3.6rem;
+        line-height: 3.6rem;
+        margin-bottom: 0.5rem;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        letter-spacing: 0.5rem;
+        text-align: center;
+        color: #C1121F;
+        background: none;
+        border: none;
+        box-shadow: none;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+    }
+
+    .navbar.open .nav-menu-title {
+        opacity: 1;
+        animation: fx-jitter 1.9s steps(1) infinite;
+    }
+
     .nav-links {
         display: flex;
         flex-direction: column;
-        width: auto;
-        min-width: 12rem;
-        max-width: 70vw;
-        gap: 0;
-        position: fixed;
-        top: 3.3rem;
-        right: 1rem;
-        z-index: 99;
-        background-color: #121212;
-        border: 2px solid #C1121F;
-        padding: 0.5rem;
-        max-height: 0;
-        opacity: 0;
-        overflow: hidden;
-        transform: translateY(-10px);
-        transition: max-height 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
-    }
-
-    .navbar.open .nav-links {
-        max-height: 500px;
-        opacity: 1;
-        transform: translateY(0);
+        width: 100%;
+        max-width: 28rem;
+        gap: 0.5rem;
     }
 
     .nav-links li {
         width: 100%;
+        opacity: 0;
+        transform: translateX(var(--from, 0)) skew(45deg) scaleY(-3);
+        transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+        transition-delay: var(--delay, 0s);
+        position: relative;
+    }
+
+    .nav-links li:nth-child(odd) {
+        --from: -70vw;
+    }
+
+    .nav-links li:nth-child(even) {
+        --from: 70vw;
+    }
+
+    .nav-links li:nth-child(1) {
+        --delay: 0.08s;
+    }
+
+    .nav-links li:nth-child(2) {
+        --delay: 0.16s;
+    }
+
+    .nav-links li:nth-child(3) {
+        --delay: 0.24s;
+    }
+
+    .nav-links li:nth-child(4) {
+        --delay: 0.32s;
+    }
+
+    .nav-links li:nth-child(5) {
+        --delay: 0.4s;
+    }
+
+    .nav-links li:nth-child(6) {
+        --delay: 0.48s;
+    }
+
+    .navbar.open .nav-links li {
+        opacity: 1;
+        transform: translateX(0) skew(0) scaleY(1);
+    }
+
+    .nav-links li:first-child a {
+        border-left: 2px solid #C1121F;
     }
 
     .nav-links a {
         width: 100%;
-        justify-content: flex-start;
-        border-left: 0;
-        border-bottom: 2px solid #C1121F;
-        padding: 0.9rem 1rem;
+        justify-content: center;
+        border: 2px solid #C1121F;
+        padding: 0.8rem 1rem;
+        font-size: 1.25rem;
+        letter-spacing: 2px;
+        color: #C1121F;
+        background-color: #121212;
+        box-shadow: none;
+        position: relative;
+        overflow: hidden;
+        transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    .nav-links li:last-child a {
-        border-bottom: 0;
+    .nav-links a:hover {
+        background-color: #C1121F;
+        color: #121212;
+    }
+
+    .navbar.open .nav-toggle span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .navbar.open .nav-toggle span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .navbar.open .nav-toggle span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
     }
 
     /* Hero */
@@ -679,6 +927,36 @@ section[id] {
         padding-left: 1rem;
     }
 
+    .tech-section .card,
+    .services-section .card {
+        align-self: center;
+        width: calc(100% - 2rem);
+        max-width: 42rem;
+    }
+
+    .tech-section .card .about-body,
+    .tech-section .card .body-box,
+    .contact-section .card .body-box {
+        width: 100%;
+    }
+
+    .tech-section .card:first-child {
+        align-items: center;
+    }
+
+    .tech-section .card:first-child .tech-title {
+        align-self: center;
+    }
+
+    .tech-icons {
+        justify-content: center;
+    }
+
+    .contact-icons {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
     .side-cards {
         gap: 1.5rem;
     }
@@ -690,11 +968,70 @@ section[id] {
 
     .tech-title {
         font-size: 1.8rem;
+        display: table;
+        width: auto;
+        align-self: center;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .side-cards .card:first-child .tech-title {
-        font-size: 1.4rem;
-        letter-spacing: 1px;
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+        display: table;
+        width: auto;
+        align-self: center;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .tech-section .card:first-child {
+        align-items: center;
+    }
+
+    .tech-section .card:first-child .tech-title {
+        display: table;
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
+        align-self: center;
+        text-align: center;
+    }
+
+    #about-card .tech-title {
+        display: table;
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
+        align-self: center;
+    }
+
+    .tech-section .card:first-child .body-box {
+        width: 100%;
+        align-self: stretch;
+    }
+
+    .tech-section .card,
+    .services-section .card,
+    .proyects-section .card,
+    .contact-section .card {
+        align-items: center;
+    }
+
+    .tech-section .card > .tech-title,
+    .services-section .card > .tech-title,
+    .proyects-section .card > .tech-title,
+    .contact-section .card > .tech-title {
+        align-self: center;
+    }
+
+    .tech-section .card > *,
+    .services-section .card > *,
+    .proyects-section .card > *,
+    .contact-section .card > * {
+        width: 100%;
     }
 
     .about-text {
@@ -706,43 +1043,50 @@ section[id] {
         font-size: 2.2rem;
     }
 
-.services-section {
-        gap: 1.5rem;
-    }
-
-    /* ==== Reordenar cards en mobile: About, Services/Projects, Technologies/Contact ==== */
+    /* ==== Orden en mobile: About -> Services -> Projects -> Tech Stack -> Contact ==== */
     body {
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
+        padding-bottom: 2rem;
     }
 
+    /* Las secciones dejan de generar cajas para que todas las cards sean hijas directas del body
+       y se puedan ordenar entre sí con order */
     .tech-section,
-    .services-section {
+    .services-section,
+    .side-cards {
         display: contents;
+    }
+
+    #about-card,
+    #services-card,
+    #projects,
+    #tech,
+    #contact {
+        width: calc(100% - 2rem);
+        max-width: 42rem;
+        margin: 0 auto;
+        align-self: center;
     }
 
     #about-card {
         order: 1;
-        width: calc(100% - 2rem);
-        margin: 0 1rem;
     }
 
     #services-card {
         order: 2;
-        width: calc(100% - 2rem);
-        margin: 0 1rem;
     }
 
     #projects {
         order: 3;
-        width: calc(100% - 2rem);
-        margin: 0 1rem;
     }
 
-    .side-cards {
+    #tech {
         order: 4;
-        width: calc(100% - 2rem);
-        margin: 0 1rem;
+    }
+
+    #contact {
+        order: 5;
     }
 }
